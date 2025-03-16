@@ -22,6 +22,12 @@ class AGAM415_firstpersonProjectile : public AActor
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
 	UProjectileMovementComponent* ProjectileMovement;
 
+	//Referance to static mesh
+	UPROPERTY(EditAnywhere)
+		UStaticMeshComponent* ballMesh;
+
+	UPROPERTY(EditAnywhere)
+		UMaterial* baseMat;
 public:
 	AGAM415_firstpersonProjectile();
 
