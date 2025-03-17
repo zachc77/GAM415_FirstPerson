@@ -20,6 +20,7 @@ AGAM415_firstpersonProjectile::AGAM415_firstpersonProjectile()
 	CollisionComp->SetWalkableSlopeOverride(FWalkableSlopeOverride(WalkableSlope_Unwalkable, 0.f));
 	CollisionComp->CanCharacterStepUpOn = ECB_No;
 
+	//Creates the proj mesh
 	ballMesh = CreateDefaultSubobject<UStaticMeshComponent>("Ball Mesh");
 
 	// Set as root component
@@ -40,6 +41,20 @@ AGAM415_firstpersonProjectile::AGAM415_firstpersonProjectile()
 	InitialLifeSpan = 3.0f;
 }
 
+void AGAM415_firstpersonProjectile::BeginPlay()
+{
+	Super::BeginPlay();
+
+	//Generate color
+	randColor = FLinearColor(UKismetMathLibrary::RandomFloatInRange(0.f, 1.f), UKismetMathLibrary::RandomFloatInRange(0.f, 1.f), UKismetMathLibrary::RandomFloatInRange(0.f, 1.f), 1.f);
+
+	dmiMat = UMaterialInstanceDynamic::Create(projMat, this);
+	//applies dynamic mat to proj
+	ballMesh->SetMaterial(0, dmiMat);
+	//Updates the projColor in the mat applying the color that is gen
+	dmiMat->SetVectorParameterValue("ProjColor", randColor);
+}
+
 void AGAM415_firstpersonProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
 	// Only add impulse and destroy projectile if we hit a physics
@@ -52,21 +67,15 @@ void AGAM415_firstpersonProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* 
 
 	if (OtherActor != nullptr)
 	{
-		float ranNumX = UKismetMathLibrary::RandomFloatInRange(0.f, 1.f);
-		float ranNumY = UKismetMathLibrary::RandomFloatInRange(0.f, 1.f);
-		float ranNumZ = UKismetMathLibrary::RandomFloatInRange(0.f, 1.f);
+		
 		//Value that adjust the frame pram in the ue5 code 4 in texture 0 1 2 3 thats where the float comes from
 		float frameNum = UKismetMathLibrary::RandomFloatInRange(0.f, 3.f);
 
-		FVector4 randColor = FVector4(ranNumX, ranNumY, ranNumZ, 1.f);
-
-		// adjust the decal                                                                                    //Size of decal                 //Spawns in correct
+		// adjust the decal                                                                                    //Size of decal    //Spawns in where it collides  //decal rotation aligns with surface
 		auto Decal = UGameplayStatics::SpawnDecalAtLocation(GetWorld(), baseMat, FVector(UKismetMathLibrary::RandomFloatInRange(20.f, 40.f)), Hit.Location, Hit.Normal.Rotation(), 0.f);
-
 		auto MatInstance = Decal->CreateDynamicMaterialInstance();
 
 		MatInstance->SetVectorParameterValue("Color", randColor);
-
 		MatInstance->SetScalarParameterValue("Frame", frameNum);
 	}
 }
