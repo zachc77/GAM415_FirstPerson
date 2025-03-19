@@ -44,13 +44,13 @@ AGAM415_firstpersonProjectile::AGAM415_firstpersonProjectile()
 void AGAM415_firstpersonProjectile::BeginPlay()
 {
 	Super::BeginPlay();
-
 	//Generate color
 	randColor = FLinearColor(UKismetMathLibrary::RandomFloatInRange(0.f, 1.f), UKismetMathLibrary::RandomFloatInRange(0.f, 1.f), UKismetMathLibrary::RandomFloatInRange(0.f, 1.f), 1.f);
 
 	dmiMat = UMaterialInstanceDynamic::Create(projMat, this);
 	//applies dynamic mat to proj
 	ballMesh->SetMaterial(0, dmiMat);
+	
 	//Updates the projColor in the mat applying the color that is gen
 	dmiMat->SetVectorParameterValue("ProjColor", randColor);
 }

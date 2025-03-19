@@ -40,7 +40,7 @@ class AGAM415_firstpersonProjectile : public AActor
 
 public:
 	AGAM415_firstpersonProjectile();
-
+	//
 protected:
 	virtual void BeginPlay();
 
