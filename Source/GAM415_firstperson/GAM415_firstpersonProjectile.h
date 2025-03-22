@@ -8,7 +8,7 @@
 
 class USphereComponent;
 class UProjectileMovementComponent;
-
+class UNiagaraSystem;
 UCLASS(config=Game)
 class AGAM415_firstpersonProjectile : public AActor
 {
@@ -38,6 +38,9 @@ class AGAM415_firstpersonProjectile : public AActor
 
 	UPROPERTY()
 		UMaterialInstanceDynamic* dmiMat;
+
+	UPROPERTY(Editanywhere)
+		UNiagaraSystem* colorP;
 
 public:
 	AGAM415_firstpersonProjectile();

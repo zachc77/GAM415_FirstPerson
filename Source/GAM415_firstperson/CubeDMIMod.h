@@ -39,6 +39,9 @@ public:
 	UPROPERTY()
 		UMaterialInstanceDynamic* dmiMat;
 
+	UPROPERTY(Editanywhere)
+		UNiagaraSystem* colorP;
+
 	UFUNCTION()
 	void OnOverLapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResults);
 

@@ -6,6 +6,8 @@
 #include "Components/DecalComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/GameplayStatics.h"
+#include "NiagaraFunctionLibrary.h"
+#include "NiagaraComponent.h"
 
 
 AGAM415_firstpersonProjectile::AGAM415_firstpersonProjectile() 
@@ -67,6 +69,13 @@ void AGAM415_firstpersonProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* 
 
 	if (OtherActor != nullptr)
 	{
+		if (colorP)
+		{
+			UNiagaraComponent* particalComp = UNiagaraFunctionLibrary::SpawnSystemAttached(colorP, HitComp, NAME_None, FVector(-20.f, 0.f, 0.f), FRotator(0.f), EAttachLocation::KeepRelativeOffset, true);
+			particalComp->SetNiagaraVariableLinearColor(FString("RandomColor"), randColor);
+			ballMesh->DestroyComponent();
+			CollisionComp->BodyInstance.SetCollisionProfileName("NoCollision");
+		}
 		
 		//Value that adjust the frame pram in the ue5 code 4 in texture 0 1 2 3 thats where the float comes from
 		float frameNum = UKismetMathLibrary::RandomFloatInRange(0.f, 3.f);
