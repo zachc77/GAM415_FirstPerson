@@ -27,6 +27,7 @@ class AGAM415_firstpersonProjectile : public AActor
 		UStaticMeshComponent* ballMesh;
 
 	UPROPERTY(EditAnywhere)
+
 		UMaterial* baseMat;
 
 	UPROPERTY()

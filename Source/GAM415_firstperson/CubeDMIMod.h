@@ -7,6 +7,9 @@
 #include "Components/BoxComponent.h"
 #include "CubeDMIMod.generated.h"
 
+class UNiagaraSystem;
+
+
 UCLASS()
 class GAM415_FIRSTPERSON_API ACubeDMIMod : public AActor
 {

@@ -5,6 +5,7 @@
 #include "GAM415_firstpersonCharacter.h"
 #include "Kismet/KismetMathLibrary.h"
 
+
 // Sets default values
 ACubeDMIMod::ACubeDMIMod()
 {
@@ -60,7 +61,7 @@ void ACubeDMIMod::OnOverLapBegin(UPrimitiveComponent* OverlappedComp, AActor* Ot
 		float ranOpacity = UKismetMathLibrary::RandomFloatInRange(0.f, 1.f); // Random opacity value
 
 		// set a vector 4 to the random values 
-		FVector4 randColor = FVector4(ranNumX, ranNumY, ranNumZ, 1.f);
+		FLinearColor randColor = FLinearColor(ranNumX, ranNumY, ranNumZ, 1.f);
 		if (dmiMat)
 		{
 			dmiMat->SetVectorParameterValue("Color", randColor);
