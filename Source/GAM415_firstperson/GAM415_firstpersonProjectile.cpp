@@ -71,7 +71,8 @@ void AGAM415_firstpersonProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* 
 	{
 		if (colorP)
 		{
-			UNiagaraComponent* particalComp = UNiagaraFunctionLibrary::SpawnSystemAttached(colorP, HitComp, NAME_None, FVector(-20.f, 0.f, 0.f), FRotator(0.f), EAttachLocation::KeepRelativeOffset, true);
+			UNiagaraComponent* particalComp = UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), colorP, Hit.Location, Hit.Normal.Rotation());
+			particalComp->SetVariableLinearColor("RandomColor", FLinearColor(randColor));
 			particalComp->SetNiagaraVariableLinearColor(FString("RandomColor"), randColor);
 			ballMesh->DestroyComponent();
 			CollisionComp->BodyInstance.SetCollisionProfileName("NoCollision");
