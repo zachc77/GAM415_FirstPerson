@@ -58,6 +58,7 @@ public:
 	UFUNCTION()
 	void SetBool(AGAM415_firstpersonCharacter* playerChar);
 	
+	// used to update position and rotation to sim the linked portal 
 	UFUNCTION()
 		void UpdatePortals();
 };
